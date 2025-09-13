@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colorado Springs Traffic & Weather</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="bg-[#0f172a] text-white font-sans flex flex-col items-center p-4 gap-6 min-h-screen">
+
+
+<div class="w-full max-w-6xl relative rounded-xl overflow-hidden shadow-lg">
+  <img src="https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/Garden-of-the-Gods-Colorado-Springs-Panoramic-Sunset-Splendor.webp"
+       class="absolute inset-0 w-full h-full object-cover brightness-50" alt="Colorado Springs Sunset">
+  <div class="relative flex justify-between items-start py-4 px-6 gap-4">
+    <div class="flex flex-col gap-2">
+      <div class="text-2xl md:text-3xl font-bold text-green-400 drop-shadow-lg">Colorado Springs</div>
+      <div id="forecast" class="flex gap-2 overflow-x-auto py-2"></div>
+    </div>
+    <div class="flex flex-col items-end gap-2">
+      <div class="text-3xl md:text-4xl font-bold text-cyan-400 drop-shadow-[0_0_15px_rgba(255,165,0,0.9)]" id="temp">--°F</div>
+      <div class="text-right">
+        <div class="text-4xl md:text-5xl font-orbitron text-cyan-400 drop-shadow-[0_0_20px_rgba(255,165,0,0.9)]" id="digital-time">00:00:00</div>
+        <div class="text-green-400 mt-1 text-lg md:text-xl" id="date-display">Monday, January 1</div>
+        <div class="text-sm text-orange-400 mt-1" id="high-low">H: -- L: --</div>
+        <div class="text-sm text-orange-400" id="feels-like">Feels like --</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl flex-1">
+  <div class="cam-box text-center">
+    <h2 class="text-xl font-semibold mb-2">I-25 & Fillmore</h2>
+    <img id="fillmore" class="rounded-lg shadow-lg" src="https://websvc.coloradosprings.gov/live/TOC/00095_I-25%20(mm145)%20_%20Fillmore.jpg" alt="I-25 & Fillmore Traffic Camera">
+  </div>
+  <div class="cam-box text-center">
+    <h2 class="text-xl font-semibold mb-2">I-25 & Circle</h2>
+    <img id="circle" class="rounded-lg shadow-lg" src="https://websvc.coloradosprings.gov/live/TOC/00106_I-25%20(mm138)%20_%20Circle.jpg" alt="I-25 & Circle Traffic Camera">
+  </div>
+  <div class="cam-box text-center">
+    <h2 class="text-xl font-semibold mb-2">Platte & Murray</h2>
+    <img id="platte" class="rounded-lg shadow-lg" src="https://websvc.coloradosprings.gov/live/TOC/00072_Platte%20Ave%20(E04300)%20_%20Murray.jpg" alt="Platte & Murray Traffic Camera">
+  </div>
+  <div class="cam-box text-center">
+    <h2 class="text-xl font-semibold mb-2">Powers & N. Carefree</h2>
+    <img id="powers" class="rounded-lg shadow-lg" src="https://websvc.coloradosprings.gov/live/TOC/00014_Powers%20(mm145)%20_%20Carefree%20N.jpg" alt="Powers & North Carefree Traffic Camera">
+  </div>
+  <div class="cam-box text-center">
+    <h2 class="text-xl font-semibold mb-2">Austin Bluffs & Stetson Hills</h2>
+    <img id="austin" class="rounded-lg shadow-lg" src="https://websvc.coloradosprings.gov/live/TOC/00064_Austin%20Bluffs%20(N05500)%20_%20Stetson%20Hills.jpg" alt="Austin Bluffs & Stetson Hills Traffic Camera">
+  </div>
+  <div class="cam-box text-center">
+    <h2 class="text-xl font-semibold mb-2">Academy & Platte</h2>
+    <img id="academy" class="rounded-lg shadow-lg" src="https://websvc.coloradosprings.gov/live/TOC/00118_Academy%20(N00400)%20_%20Platte%20Ave.jpg" alt="Academy & Platte Traffic Camera">
+  </div>
+</div>
+
+<footer class="w-full text-indigo-300 text-center py-2 fixed bottom-0 left-0">
+  powered by JesseJesse.com
+</footer>
+
+<script>
+function refreshCams() {
+  const cams = ['fillmore','circle','platte','powers','austin','academy'];
+  const urls = [
+    "https://websvc.coloradosprings.gov/live/TOC/00095_I-25%20(mm145)%20_%20Fillmore.jpg",
+    "https://websvc.coloradosprings.gov/live/TOC/00106_I-25%20(mm138)%20_%20Circle.jpg",
+    "https://websvc.coloradosprings.gov/live/TOC/00072_Platte%20Ave%20(E04300)%20_%20Murray.jpg",
+    "https://websvc.coloradosprings.gov/live/TOC/00014_Powers%20(mm145)%20_%20Carefree%20N.jpg",
+    "https://websvc.coloradosprings.gov/live/TOC/00064_Austin%20Bluffs%20(N05500)%20_%20Stetson%20Hills.jpg",
+    "https://websvc.coloradosprings.gov/live/TOC/00118_Academy%20(N00400)%20_%20Platte%20Ave.jpg"
+  ];
+  cams.forEach((id,i)=>document.getElementById(id).src = urls[i]+"?t="+new Date().getTime());
+}
+setInterval(refreshCams,10000);
+refreshCams();
+
+function updateClock(){
+  const now=new Date();
+  document.getElementById('digital-time').textContent=
+    `${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}:${now.getSeconds().toString().padStart(2,'0')}`;
+  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('date-display').textContent=`${days[now.getDay()]}, ${months[now.getMonth()]} ${now.getDate()}`;
+}
+setInterval(updateClock,1000);
+updateClock();
+
+const apiKey="2bdad522ac3bb9f3eefa5566d0f514fa";
+const lat=38.8339;
+const lon=-104.8214;
+function cToF(c){return Math.round(c*9/5+32);}
+async function getWeather(){
+  try{
+    const res=await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&units=metric&appid=${apiKey}`);
+    const data=await res.json();
+    if(data.current){
+      document.getElementById("temp").textContent=cToF(data.current.temp)+"°F";
+      document.getElementById("high-low").textContent = `H: ${cToF(data.daily[0].temp.max)}° L: ${cToF(data.daily[0].temp.min)}°`;
+      document.getElementById("feels-like").textContent = `Feels like ${cToF(data.current.feels_like)}°`;
+    }
+    const forecastEl=document.getElementById("forecast");
+    forecastEl.innerHTML="";
+    data.daily.slice(0,7).forEach(day=>{
+      const date=new Date(day.dt*1000);
+      const dayName=date.toLocaleDateString('en-US',{weekday:'short'});
+      const icon=`https://openweathermap.org/img/wn/${day.weather[0].icon}.png`;
+      const minF=cToF(day.temp.min);
+      const maxF=cToF(day.temp.max);
+      const card=document.createElement('div');
+      card.className="flex flex-col items-center text-center bg-indigo-900/40 rounded-lg px-2 py-1 min-w-[70px] shadow-md";
+      card.innerHTML=`<div class="text-xs text-gray-300">${dayName}</div><img src="${icon}" alt="${day.weather[0].description}" class="w-10 h-10"><div class="text-sm text-orange-400 font-semibold">${maxF}°</div><div class="text-xs text-gray-300">${minF}°</div>`;
+      forecastEl.appendChild(card);
+    });
+  }catch(e){console.error("Weather fetch failed:",e);}
+}
+getWeather();
+setInterval(getWeather,600000);
+</script>
+
+</body>
+</html>
