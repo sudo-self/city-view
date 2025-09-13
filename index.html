@@ -103,10 +103,12 @@
         // CLOCK
         function updateClock() {
             const now = new Date();
-            document.getElementById("digital-time").textContent = `${now.getHours().toString().padStart(2,"0")}:${now.getMinutes().toString().padStart(2,"0")}:${now.getSeconds().toString().padStart(2,"0")}`;
+            document.getElementById("digital-time").textContent =
+                `${now.getHours().toString().padStart(2,"0")}:${now.getMinutes().toString().padStart(2,"0")}:${now.getSeconds().toString().padStart(2,"0")}`;
             const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
             const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-            document.getElementById("date-display").textContent = `${days[now.getDay()]}, ${months[now.getMonth()]} ${now.getDate()}`;
+            document.getElementById("date-display").textContent =
+                `${days[now.getDay()]}, ${months[now.getMonth()]} ${now.getDate()}`;
         }
         setInterval(updateClock,1000);
         updateClock();
@@ -152,6 +154,26 @@
             }
         }
         getIPInfo();
+
+        // TRAFFIC CAMERAS AUTO REFRESH
+        const cams = [
+            {id: "fillmore", url: "https://websvc.coloradosprings.gov/live/TOC/00095_I-25%20(mm145)%20_%20Fillmore.jpg"},
+            {id: "circle", url: "https://websvc.coloradosprings.gov/live/TOC/00106_I-25%20(mm138)%20_%20Circle.jpg"},
+            {id: "platte", url: "https://websvc.coloradosprings.gov/live/TOC/00072_Platte%20Ave%20(E04300)%20_%20Murray.jpg"},
+            {id: "powers", url: "https://websvc.coloradosprings.gov/live/TOC/00014_Powers%20(mm145)%20_%20Carefree%20N.jpg"},
+            {id: "austin", url: "https://websvc.coloradosprings.gov/live/TOC/00064_Austin%20Bluffs%20(N05500)%20_%20Stetson%20Hills.jpg"},
+            {id: "academy", url: "https://websvc.coloradosprings.gov/live/TOC/00118_Academy%20(N00400)%20_%20Platte%20Ave.jpg"}
+        ];
+
+        function refreshCams() {
+            cams.forEach(cam => {
+                const img = document.getElementById(cam.id);
+                if (img) img.src = cam.url + "?t=" + new Date().getTime();
+            });
+        }
+
+        // refresh every 5 seconds
+        setInterval(refreshCams, 5000);
     </script>
 
     <script src="https://widget.rss.app/v1/ticker.js" type="text/javascript" async></script>
