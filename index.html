@@ -4,105 +4,105 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Colorado Springs Traffic & Weather</title>
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <style>
-      /* Custom aspect-ratio for Tailwind if plugin not used */
-      .aspect-16-9 {
-        position: relative;
-        width: 100%;
-        padding-top: 56.25%; /* 16:9 */
-      }
-      .aspect-16-9 iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-      }
-    </style>
   </head>
-  <body class="bg-gradient-to-b from-[#0f172a] to-[#1e293b] text-white font-sans flex flex-col items-center p-4 gap-6">
-
-    <!-- Header -->
+  <body
+    class="bg-gradient-to-b from-[#0f172a] to-[#1e293b] text-white font-sans flex flex-col items-center p-4 gap-6"
+  >
     <div class="w-full max-w-6xl relative rounded-xl shadow-lg overflow-hidden">
       <img
         src="https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/Garden-of-the-Gods-Colorado-Springs-Panoramic-Sunset-Splendor.webp"
         class="absolute inset-0 w-full h-full object-cover brightness-50"
         alt="Header Background"
       />
-      <div class="relative flex flex-col md:flex-row justify-between py-4 px-4 gap-4">
-        <!-- Left: Title -->
+
+      <!-- Header Content -->
+      <div class="relative flex justify-between items-start py-4 px-4 gap-4">
+        <!-- Left: Title + Doppler -->
         <div class="flex flex-col gap-2">
-          <div class="text-2xl md:text-3xl font-bold text-emerald-500 drop-shadow-lg">
+          <div
+            class="text-2xl md:text-3xl font-bold text-emerald-500 drop-shadow-lg"
+          >
             Colorado Springs
           </div>
+      <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.airnavradar.com/live-widget/KCOS?type=card&showIcao=true&background=true"></iframe>
         </div>
 
-        <!-- Right: Clock + Weather -->
+  
         <div class="flex flex-col items-end gap-2">
-          <div class="text-3xl md:text-4xl font-bold text-cyan-400 drop-shadow-[0_0_15px_rgba(255,165,0,0.9)]" id="temp">
+          <div
+            class="text-3xl md:text-4xl font-bold text-cyan-400 drop-shadow-[0_0_15px_rgba(255,165,0,0.9)]"
+            id="temp"
+          >
             --°F
           </div>
           <div class="text-right">
-            <div class="text-4xl md:text-5xl font-orbitron text-cyan-400 drop-shadow-[0_0_20px_rgba(255,165,0,0.9)]" id="digital-time">
+            <div
+              class="text-4xl md:text-5xl font-orbitron text-cyan-400 drop-shadow-[0_0_20px_rgba(255,165,0,0.9)]"
+              id="digital-time"
+            >
               00:00:00
             </div>
-            <div class="text-yellow-400 mt-1 text-lg md:text-xl" id="date-display">
+            <div
+              class="text-yellow-400 mt-1 text-lg md:text-xl"
+              id="date-display"
+            >
               Monday, January 1
             </div>
-            <div class="text-sm text-emerald-500 mt-1">EL: 6,188 FT</div>
+             <div class="text-sm text-emerald-500 mt-1">EL: 6,188 FT</div>
+           
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Flight Tracker -->
-    <div class="w-full max-w-3xl rounded-xl overflow-hidden shadow-lg aspect-16-9">
-      <iframe
-        src="https://www.airnavradar.com/live-widget/KCOS?type=card&showIcao=true&background=true"
-        frameborder="0"
-        scrolling="no"
-      ></iframe>
-    </div>
 
-    <!-- Traffic Cameras -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full justify-items-center px-2 md:px-0">
-      <div class="cam-box text-center w-full max-w-xs">
-        <h2 class="text-xl font-semibold mb-2">I-25 & Fillmore</h2>
-        <img id="fillmore" class="rounded-lg shadow-lg w-full" src="https://websvc.coloradosprings.gov/live/TOC/00095_I-25%20(mm145)%20_%20Fillmore.jpg" alt="I-25 & Fillmore Traffic Camera" />
-      </div>
-      <div class="cam-box text-center w-full max-w-xs">
-        <h2 class="text-xl font-semibold mb-2">I-25 & Circle</h2>
-        <img id="circle" class="rounded-lg shadow-lg w-full" src="https://websvc.coloradosprings.gov/live/TOC/00106_I-25%20(mm138)%20_%20Circle.jpg" alt="I-25 & Circle Traffic Camera" />
-      </div>
-      <div class="cam-box text-center w-full max-w-xs">
-        <h2 class="text-xl font-semibold mb-2">Platte & Murray</h2>
-        <img id="platte" class="rounded-lg shadow-lg w-full" src="https://websvc.coloradosprings.gov/live/TOC/00072_Platte%20Ave%20(E04300)%20_%20Murray.jpg" alt="Platte & Murray Traffic Camera" />
-      </div>
-      <div class="cam-box text-center w-full max-w-xs">
-        <h2 class="text-xl font-semibold mb-2">Powers & N. Carefree</h2>
-        <img id="powers" class="rounded-lg shadow-lg w-full" src="https://websvc.coloradosprings.gov/live/TOC/00014_Powers%20(mm145)%20_%20Carefree%20N.jpg" alt="Powers & North Carefree Traffic Camera" />
-      </div>
-      <div class="cam-box text-center w-full max-w-xs">
-        <h2 class="text-xl font-semibold mb-2">Austin Bluffs & Stetson Hills</h2>
-        <img id="austin" class="rounded-lg shadow-lg w-full" src="https://websvc.coloradosprings.gov/live/TOC/00064_Austin%20Bluffs%20(N05500)%20_%20Stetson%20Hills.jpg" alt="Austin Bluffs & Stetson Hills Traffic Camera" />
-      </div>
-      <div class="cam-box text-center w-full max-w-xs">
-        <h2 class="text-xl font-semibold mb-2">Academy & Platte</h2>
-        <img id="academy" class="rounded-lg shadow-lg w-full" src="https://websvc.coloradosprings.gov/live/TOC/00118_Academy%20(N00400)%20_%20Platte%20Ave.jpg" alt="Academy & Platte Traffic Camera" />
-      </div>
-    </div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full justify-items-center px-2 md:px-0">
+  <div class="cam-box text-center w-full max-w-xs">
+    <h2 class="text-xl font-semibold mb-2">I-25 & Fillmore</h2>
+    <img id="fillmore" class="rounded-lg shadow-lg w-full" src="https://websvc.coloradosprings.gov/live/TOC/00095_I-25%20(mm145)%20_%20Fillmore.jpg" alt="I-25 & Fillmore Traffic Camera" />
+  </div>
+  <div class="cam-box text-center w-full max-w-xs">
+    <h2 class="text-xl font-semibold mb-2">I-25 & Circle</h2>
+    <img id="circle" class="rounded-lg shadow-lg w-full" src="https://websvc.coloradosprings.gov/live/TOC/00106_I-25%20(mm138)%20_%20Circle.jpg" alt="I-25 & Circle Traffic Camera" />
+  </div>
+  <div class="cam-box text-center w-full max-w-xs">
+    <h2 class="text-xl font-semibold mb-2">Platte & Murray</h2>
+    <img id="platte" class="rounded-lg shadow-lg w-full" src="https://websvc.coloradosprings.gov/live/TOC/00072_Platte%20Ave%20(E04300)%20_%20Murray.jpg" alt="Platte & Murray Traffic Camera" />
+  </div>
+  <div class="cam-box text-center w-full max-w-xs">
+    <h2 class="text-xl font-semibold mb-2">Powers & N. Carefree</h2>
+    <img id="powers" class="rounded-lg shadow-lg w-full" src="https://websvc.coloradosprings.gov/live/TOC/00014_Powers%20(mm145)%20_%20Carefree%20N.jpg" alt="Powers & North Carefree Traffic Camera" />
+  </div>
+  <div class="cam-box text-center w-full max-w-xs">
+    <h2 class="text-xl font-semibold mb-2">Austin Bluffs & Stetson Hills</h2>
+    <img id="austin" class="rounded-lg shadow-lg w-full" src="https://websvc.coloradosprings.gov/live/TOC/00064_Austin%20Bluffs%20(N05500)%20_%20Stetson%20Hills.jpg" alt="Austin Bluffs & Stetson Hills Traffic Camera" />
+  </div>
+  <div class="cam-box text-center w-full max-w-xs">
+    <h2 class="text-xl font-semibold mb-2">Academy & Platte</h2>
+    <img id="academy" class="rounded-lg shadow-lg w-full" src="https://websvc.coloradosprings.gov/live/TOC/00118_Academy%20(N00400)%20_%20Platte%20Ave.jpg" alt="Academy & Platte Traffic Camera" />
+  </div>
+</div>
+
+
 
     <script>
       // Refresh Cameras
       function refreshCams() {
-        const cams = ["fillmore","circle","platte","powers","austin","academy"];
+        const cams = [
+          "fillmore",
+          "circle",
+          "platte",
+          "powers",
+          "austin",
+          "academy",
+        ];
         const urls = [
           "https://websvc.coloradosprings.gov/live/TOC/00095_I-25%20(mm145)%20_%20Fillmore.jpg",
           "https://websvc.coloradosprings.gov/live/TOC/00106_I-25%20(mm138)%20_%20Circle.jpg",
@@ -111,38 +111,74 @@
           "https://websvc.coloradosprings.gov/live/TOC/00064_Austin%20Bluffs%20(N05500)%20_%20Stetson%20Hills.jpg",
           "https://websvc.coloradosprings.gov/live/TOC/00118_Academy%20(N00400)%20_%20Platte%20Ave.jpg",
         ];
-        cams.forEach((id,i)=>{document.getElementById(id).src=urls[i]+"?t="+new Date().getTime();});
+        cams.forEach((id, i) => {
+          document.getElementById(id).src =
+            urls[i] + "?t=" + new Date().getTime();
+        });
       }
-      setInterval(refreshCams,10000);
+      setInterval(refreshCams, 10000);
       refreshCams();
 
       // Clock
       function updateClock() {
-        const now=new Date();
-        const h=now.getHours(), m=now.getMinutes(), s=now.getSeconds();
-        document.getElementById("digital-time").textContent=`${h.toString().padStart(2,"0")}:${m.toString().padStart(2,"0")}:${s.toString().padStart(2,"0")}`;
-        const days=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-        const months=["January","February","March","April","May","June","July","August","September","October","November","December"];
-        document.getElementById("date-display").textContent=`${days[now.getDay()]}, ${months[now.getMonth()]} ${now.getDate()}`;
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
+        document.getElementById("digital-time").textContent =
+          `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+        const days = [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ];
+        const months = [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ];
+        document.getElementById("date-display").textContent =
+          `${days[now.getDay()]}, ${months[now.getMonth()]} ${now.getDate()}`;
       }
-      setInterval(updateClock,1000);
+      setInterval(updateClock, 1000);
       updateClock();
 
-      // Weather
-      const apiKey="2bdad522ac3bb9f3eefa5566d0f514fa";
-      const city="Colorado Springs,US";
-      function cToF(c){return Math.round((c*9)/5+32);}
-      async function getWeather(){
-        const response=await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`);
-        const data=await response.json();
-        document.getElementById("temp").textContent=cToF(data.main.temp)+"°F";
+      // Weather Fetch
+      const apiKey = "2bdad522ac3bb9f3eefa5566d0f514fa";
+      const city = "Colorado Springs,US";
+      function cToF(c) {
+        return Math.round((c * 9) / 5 + 32);
+      }
+      async function getWeather() {
+        const response = await fetch(
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`,
+        );
+        const data = await response.json();
+        const tempF = cToF(data.main.temp);
+        document.getElementById("temp").textContent = tempF + "°F";
       }
       getWeather();
-      setInterval(getWeather,600000);
+      setInterval(getWeather, 600000);
     </script>
-
-    <rssapp-ticker id="tzuBWqeC4pDpi4hM"></rssapp-ticker>
-    <script src="https://widget.rss.app/v1/ticker.js" type="text/javascript" async></script>
   </body>
+  <rssapp-ticker id="tzuBWqeC4pDpi4hM"></rssapp-ticker>
+  <script
+    src="https://widget.rss.app/v1/ticker.js"
+    type="text/javascript"
+    async
+  ></script>
 </html>
 
