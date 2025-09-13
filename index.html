@@ -23,7 +23,7 @@
 </head>
 <body class="bg-gradient-to-b from-[#0f172a] to-[#1e293b] text-white flex flex-col items-center p-4 gap-6">
 
-    <!-- HEADER + CLOCK + WEATHER -->
+
     <div class="w-full max-w-6xl relative rounded-xl shadow-lg overflow-hidden">
         <img src="https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/Garden-of-the-Gods-Colorado-Springs-Panoramic-Sunset-Splendor.webp"
              class="absolute inset-0 w-full h-full object-cover brightness-50"
@@ -46,7 +46,7 @@
         </div>
     </div>
 
-    <!-- TRAFFIC CAMERAS -->
+ 
     <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-4">
         <div class="cam-box blur-card p-4 text-center">
             <h3 class="text-lg font-semibold mb-2">I-25 & Fillmore</h3>
@@ -74,15 +74,15 @@
         </div>
     </div>
 
-    <!-- FLIGHT NEWS & RSS -->
+
     <div class="w-full max-w-6xl bg-gray-900/80 rounded-xl shadow-lg p-6 mt-6 flex flex-col gap-6">
 
-        <!-- IP INFO + Flight Table -->
+   
         <div class="bg-gray-800 rounded-xl p-4 flex flex-col gap-4">
             <h2 class="text-xl font-semibold mb-4 text-emerald-400">Your Public IP Info</h2>
             <div id="ip-info" class="text-sm">Loading IP info...</div>
 
-            <!-- Flight Table (scrollable on mobile) -->
+     
             <div class="overflow-x-auto mt-4">
                 <iframe class="w-full h-64 md:h-80 rounded-xl shadow-lg"
                         frameborder="0"
@@ -94,13 +94,13 @@
             </div>
         </div>
 
-        <!-- RSS Ticker -->
+
         <rssapp-ticker id="tzuBWqeC4pDpi4hM" class="mt-4"></rssapp-ticker>
     </div>
 
-    <!-- SCRIPTS -->
+
     <script>
-        // CLOCK
+     
         function updateClock() {
             const now = new Date();
             document.getElementById("digital-time").textContent =
@@ -113,7 +113,7 @@
         setInterval(updateClock,1000);
         updateClock();
 
-        // WEATHER
+    
         const apiKey = "2bdad522ac3bb9f3eefa5566d0f514fa";
         const city = "Colorado Springs,US";
         function cToF(c){ return Math.round(c*9/5+32); }
@@ -155,7 +155,7 @@
         }
         getIPInfo();
 
-        // TRAFFIC CAMERAS AUTO REFRESH
+    
         const cams = [
             {id: "fillmore", url: "https://websvc.coloradosprings.gov/live/TOC/00095_I-25%20(mm145)%20_%20Fillmore.jpg"},
             {id: "circle", url: "https://websvc.coloradosprings.gov/live/TOC/00106_I-25%20(mm138)%20_%20Circle.jpg"},
@@ -172,8 +172,8 @@
             });
         }
 
-        // refresh every 5 seconds
-        setInterval(refreshCams, 500);
+    
+        setInterval(refreshCams, 1000);
     </script>
 
     <script src="https://widget.rss.app/v1/ticker.js" type="text/javascript" async></script>
