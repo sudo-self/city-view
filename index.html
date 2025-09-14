@@ -1,400 +1,739 @@
+<!--https://sudo-self.github.io/city-view/index.html -->
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Colorado Springs Traffic & Weather</title>
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    body { font-family: 'Poppins', sans-serif; }
-    .blur-card {
-      backdrop-filter: blur(12px);
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 1rem;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .blur-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
-    }
-    iframe { max-width: 100%; border: none; }
-    @keyframes marquee {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
-    }
-    .crypto-marquee-inner {
-      display: inline-block;
-      white-space: nowrap;
-      animation: marquee 30s linear infinite;
-    }
-  </style>
-</head>
-<body class="bg-gradient-to-b from-[#0f172a] to-[#1e293b] text-white flex flex-col items-center p-4 gap-6">
-
-  <!-- HEADER -->
-  <div class="w-full max-w-6xl relative rounded-2xl shadow-2xl overflow-hidden">
-    <img src="https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/default_image_-_horz.jpg"
-         class="absolute inset-0 w-full h-full object-cover brightness-50"
-         alt="Header Background" />
-    <div class="relative p-6 flex flex-col gap-4">
-      <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-3">
-        <h1 class="text-4xl md:text-5xl font-bold text-emerald-400 drop-shadow-lg tracking-wide">Colorado Springs</h1>
-        <div class="flex gap-4 text-sm md:text-base">
-          <a href="https://www.icloud.com/find" target="_blank" class="text-pink-500 font-semibold hover:underline"> Find My iPhone</a>
-          <a href="https://www.google.com/android/find/" target="_blank" class="text-cyan-400 font-semibold hover:underline">Find My Android</a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Colorado Springs Traffic & Weather</title>
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600&family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+      .blur-card {
+        backdrop-filter: blur(12px);
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 1rem;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+      .blur-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+      }
+      iframe {
+        max-width: 100%;
+        border: none;
+      }
+      @keyframes marquee {
+        0% {
+          transform: translateX(100%);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+      .crypto-marquee-inner {
+        display: inline-block;
+        white-space: nowrap;
+        animation: marquee 30s linear infinite;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-gradient-to-b from-[#0f172a] to-[#1e293b] text-white flex flex-col items-center p-4 gap-6"
+  >
+    <!-- HEADER -->
+    <div
+      class="w-full max-w-6xl relative rounded-2xl shadow-2xl overflow-hidden"
+    >
+      <img
+        src="https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/default_image_-_horz.jpg"
+        class="absolute inset-0 w-full h-full object-cover brightness-50"
+        alt="Header Background"
+      />
+      <div class="relative p-6 flex flex-col gap-4">
+        <div
+          class="flex flex-col md:flex-row md:justify-between md:items-center gap-3"
+        >
+          <h1
+            class="text-4xl md:text-5xl font-bold text-emerald-400 drop-shadow-lg tracking-wide"
+          >
+            Colorado Springs
+          </h1>
+          <div class="flex gap-4 text-sm md:text-base">
+            <a
+              href="https://www.icloud.com/find"
+              target="_blank"
+              class="text-pink-500 font-semibold hover:underline"
+              > Find My iPhone</a
+            >
+            <a
+              href="https://www.google.com/android/find/"
+              target="_blank"
+              class="text-cyan-400 font-semibold hover:underline"
+              >Find My Android</a
+            >
+          </div>
+        </div>
+        <div class="flex flex-col md:flex-row justify-between gap-6 mt-2">
+          <div class="flex flex-col items-start gap-2">
+            <div
+              class="text-4xl md:text-5xl font-bold text-cyan-400 drop-shadow-[0_0_15px_rgba(0,0,0,0.8)]"
+              id="temp"
+            >
+              --°F
+            </div>
+            <div
+              class="text-4xl md:text-6xl font-orbitron text-cyan-400 drop-shadow-[0_0_20px_rgba(0,0,0,0.8)]"
+              id="digital-time"
+            >
+              00:00:00
+            </div>
+            <div
+              class="text-yellow-400 mt-1 text-lg md:text-xl drop-shadow-[0_0_10px_rgba(0,0,0,0.8)] font-medium"
+              id="date-display"
+            >
+              Monday, January 1
+            </div>
+            <div class="text-sm text-white mt-1 tracking-wide">
+              ⛰️6,188 🧍478,961
+            </div>
+          </div>
         </div>
       </div>
-      <div class="flex flex-col md:flex-row justify-between gap-6 mt-2">
-        <div class="flex flex-col items-start gap-2">
-          <div class="text-4xl md:text-5xl font-bold text-cyan-400 drop-shadow-[0_0_15px_rgba(0,0,0,0.8)]" id="temp">--°F</div>
-          <div class="text-4xl md:text-6xl font-orbitron text-cyan-400 drop-shadow-[0_0_20px_rgba(0,0,0,0.8)]" id="digital-time">00:00:00</div>
-          <div class="text-yellow-400 mt-1 text-lg md:text-xl drop-shadow-[0_0_10px_rgba(0,0,0,0.8)] font-medium" id="date-display">Monday, January 1</div>
-          <div class="text-sm text-white mt-1 tracking-wide">⛰️6,188   🧍478,961</div>
+    </div>
+
+    <!-- TRAFFIC CAMS -->
+    <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="cam-box blur-card p-4 text-center">
+        <h3 class="text-lg font-semibold mb-3 text-indigo-300">
+          I-25 & Fillmore
+        </h3>
+        <img
+          id="fillmore"
+          class="rounded-lg shadow-md w-full"
+          src="https://websvc.coloradosprings.gov/live/TOC/00095_I-25%20(mm145)%20_%20Fillmore.jpg"
+        />
+      </div>
+      <div class="cam-box blur-card p-4 text-center">
+        <h3 class="text-lg font-semibold mb-3 text-indigo-300">
+          I-25 & Circle
+        </h3>
+        <img
+          id="circle"
+          class="rounded-lg shadow-md w-full"
+          src="https://websvc.coloradosprings.gov/live/TOC/00106_I-25%20(mm138)%20_%20Circle.jpg"
+        />
+      </div>
+      <div class="cam-box blur-card p-4 text-center">
+        <h3 class="text-lg font-semibold mb-3 text-indigo-300">
+          Platte & Murray
+        </h3>
+        <img
+          id="platte"
+          class="rounded-lg shadow-md w-full"
+          src="https://websvc.coloradosprings.gov/live/TOC/00072_Platte%20Ave%20(E04300)%20_%20Murray.jpg"
+        />
+      </div>
+      <div class="cam-box blur-card p-4 text-center">
+        <h3 class="text-lg font-semibold mb-3 text-indigo-300">
+          Powers & Carefree
+        </h3>
+        <img
+          id="powers"
+          class="rounded-lg shadow-md w-full"
+          src="https://websvc.coloradosprings.gov/live/TOC/00014_Powers%20(mm145)%20_%20Carefree%20N.jpg"
+        />
+      </div>
+      <div class="cam-box blur-card p-4 text-center">
+        <h3 class="text-lg font-semibold mb-3 text-indigo-300">
+          Austin Bluffs & Stetson
+        </h3>
+        <img
+          id="austin"
+          class="rounded-lg shadow-md w-full"
+          src="https://websvc.coloradosprings.gov/live/TOC/00064_Austin%20Bluffs%20(N05500)%20_%20Stetson%20Hills.jpg"
+        />
+      </div>
+      <div class="cam-box blur-card p-4 text-center">
+        <h3 class="text-lg font-semibold mb-3 text-indigo-300">
+          Academy & Platte
+        </h3>
+        <img
+          id="academy"
+          class="rounded-lg shadow-md w-full"
+          src="https://websvc.coloradosprings.gov/live/TOC/00118_Academy%20(N00400)%20_%20Platte%20Ave.jpg"
+        />
+      </div>
+      <div class="cam-box blur-card p-4 text-center">
+        <h3 class="text-lg font-semibold mb-3 text-indigo-300">
+          Academy & Maizeland
+        </h3>
+        <img
+          id="academy_maizeland"
+          class="rounded-lg shadow-md w-full"
+          src="https://websvc.coloradosprings.gov/live/TOC/00122_Academy%20(N02400)%20_%20Maizeland.jpg"
+        />
+      </div>
+      <div class="cam-box blur-card p-4 text-center">
+        <h3 class="text-lg font-semibold mb-3 text-indigo-300">
+          I-25 & Woodmen
+        </h3>
+        <img
+          id="i25_woodmen"
+          class="rounded-lg shadow-md w-full"
+          src="https://websvc.coloradosprings.gov/live/TOC/00090_I-25%20(mm149)%20_%20Woodmen.jpg"
+        />
+      </div>
+      <div class="cam-box blur-card p-4 text-center">
+        <h3 class="text-lg font-semibold mb-3 text-indigo-300">CO-24 & 21st</h3>
+        <img
+          id="co24_21st"
+          class="rounded-lg shadow-md w-full"
+          src="https://websvc.coloradosprings.gov/live/TOC/00135_Hwy%2024%20(W02100)%20_%2021st.jpg"
+        />
+      </div>
+    </div>
+
+    <!-- RADIO STREAM -->
+    <div class="w-full max-w-6xl blur-card p-4 mt-4 shadow-xl text-center">
+      <h2 class="text-lg font-semibold text-purple-400 mb-2">
+        KRDO News Radio
+      </h2>
+      <iframe
+        title="KRDO News Radio Player"
+        height="150"
+        width="100%"
+        scrolling="no"
+        src="https://www.podbean.com/player-v2/?i=6wpsb-23ef48-pbblog-playlist&pbad=0&share=1&download=1&rtl=0&fonts=Arial&skin=1&order=episodic&limit=1&filter=tags&tag=12599570&ss=1c1b3fdc8331de79ec9f6e826a1e83c8&btn-skin=3&size=150"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+    <!-- ARRIVALS + DEPARTURES -->
+    <div class="w-full max-w-6xl grid md:grid-cols-2 gap-6 mt-8">
+      <div class="bg-gray-900/70 rounded-2xl p-4 shadow-xl">
+        <h2 class="text-xl font-semibold mb-4 text-blue-400 tracking-wide">
+          Arrivals & Departures
+        </h2>
+        <iframe
+          class="w-full h-80 rounded-xl shadow-md"
+          src="https://www.airnavradar.com/live-widget/KCOS?type=table&showArrivals=true"
+        ></iframe>
+      </div>
+      <div class="bg-gray-900/70 rounded-2xl p-4 shadow-xl">
+        <h2 class="text-xl font-semibold mb-4 text-emerald-400 tracking-wide">
+          Marajuania Retail
+        </h2>
+        <iframe
+          src="https://www.google.com/maps/d/embed?mid=1lg7OEkud0TsmrJiBP-WCQsm9MdfD_t0&ehbc=2E312F"
+          class="w-full h-80 rounded-xl shadow-md"
+        ></iframe>
+      </div>
+    </div>
+    <!-- BARS & NIGHTLIFE -->
+    <h2 class="text-xl font-semibold mb-4 text-pink-500 tracking-wide">
+      Bars and Nightlife
+    </h2>
+    <div class="w-full max-w-6xl mt-8 h-[80vh] overflow-y-auto">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            Voodoo Brewing — Colorado Springs Pub
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            808 Garden of the Gods Rd, Colorado Springs, CO 80907
+          </p>
+          <p class="text-sm text-cyan-300">(719) 203-6378</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            Jack Quinn’s Irish Pub & Restaurant
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            21 S Tejon St, Colorado Springs, CO 80903
+          </p>
+          <p class="text-sm text-cyan-300">(719) 385-0766</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            Poor Richard’s Restaurant / Rico’s
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            322 1/2 N Tejon St, Colorado Springs, CO 80903
+          </p>
+          <p class="text-sm text-cyan-300">(719) 578-5549</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            Whistle Pig Brewing Company
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            2117 Templeton Gap Rd, Colorado Springs, CO 80907
+          </p>
+          <p class="text-sm text-cyan-300">(719) 641-7818</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            Bourbon Brothers Smokehouse & Tavern
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            13021 Bass Pro Dr, Colorado Springs, CO 80921
+          </p>
+          <p class="text-sm text-cyan-300">(719) 219-1830</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            Goat Patch Brewing Company
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            2727 N Cascade Ave Ste 123, Colorado Springs, CO 80907
+          </p>
+          <p class="text-sm text-cyan-300">(719) 471-4628</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">503W</h3>
+          <p class="text-sm text-gray-300 mb-1">
+            503 W Colorado Ave, Colorado Springs, CO 80905
+          </p>
+          <p class="text-sm text-cyan-300">(719) 471-3370</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            Bristol Brewing Company
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            1604 S Cascade Ave, Colorado Springs, CO 80905
+          </p>
+          <p class="text-sm text-cyan-300">(719) 633-2555</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            Jose Muldoon’s Food & Drink Downtown
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            222 N Tejon St, Colorado Springs, CO 80903
+          </p>
+          <p class="text-sm text-cyan-300">(719) 636-2311</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            Bristol’s Spark Beer + BBQ
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            1604 S Cascade Ave, Colorado Springs, CO 80905
+          </p>
+          <p class="text-sm text-cyan-300">(719) 368-6100</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">CO.A.T.I.</h3>
+          <p class="text-sm text-gray-300 mb-1">
+            514 S Tejon St, Colorado Springs, CO 80903
+          </p>
+          <p class="text-sm text-cyan-300">(719) 300-7500</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            The Wines of Colorado
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            8045 W Hwy 24, Cascade, CO 80809
+          </p>
+          <p class="text-sm text-cyan-300">(719) 684-0900</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            Commonfork Bites & Brews
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            21 N Nevada Ave, Colorado Springs, CO 80903
+          </p>
+          <p class="text-sm text-cyan-300">(719) 634-0003</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            uva wine bar
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            1268 Interquest Pkwy, Suite 160, Colorado Springs, CO 80921
+          </p>
+          <p class="text-sm text-cyan-300">(719) 598-1990</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            Lumen8 Rooftop Social
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            402 S Tejon St, Colorado Springs, CO 80903
+          </p>
+          <p class="text-sm text-cyan-300">(719) 822-2889</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">Avenue 19</h3>
+          <p class="text-sm text-gray-300 mb-1">
+            19 N Tejon St, Colorado Springs, CO 80903
+          </p>
+          <p class="text-sm text-cyan-300">(719) 207-8189</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            Ivywild School
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            1604 S Cascade Ave, Colorado Springs, CO 80905
+          </p>
+          <p class="text-sm text-cyan-300">(719) 368-6100</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            Oskar Blues
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            118 N Tejon St, Colorado Springs, CO 80903
+          </p>
+          <p class="text-sm text-cyan-300">(719) 375-1925</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            Streetcar520
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            520 S Tejon St, Colorado Springs, CO 80903
+          </p>
+          <p class="text-sm text-cyan-300">(719) 633-3300</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            Loyal Coffee
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            408 S Nevada Ave, Colorado Springs, CO 80903
+          </p>
+          <p class="text-sm text-cyan-300">(719) 235-5080</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            ViewHouse Colorado Springs
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            7114 Campus Dr, Colorado Springs, CO 80920
+          </p>
+          <p class="text-sm text-cyan-300">(719) 394-4137</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            Trinity Brewing Company
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            1466 Garden of the Gods Rd, Ste 184, Colorado Springs, CO 80907
+          </p>
+          <p class="text-sm text-cyan-300">(719) 497-2739</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            Colorado Mountain Brewery — Roundhouse
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            600 S 21st St #180, Colorado Springs, CO 80904
+          </p>
+          <p class="text-sm text-cyan-300">(719) 466-8240</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            Illegal Pete’s Tejon
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            32 S Tejon, Colorado Springs, CO 80903
+          </p>
+          <p class="text-sm text-cyan-300">(719) 752-1735</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            Cheers Liquor Mart
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            1105 N Circle Dr, Colorado Springs, CO 80909
+          </p>
+          <p class="text-sm text-cyan-300">(719) 574-2244</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">ICONS</h3>
+          <p class="text-sm text-gray-300 mb-1">
+            16 E Kiowa St, Colorado Springs, CO 80903
+          </p>
+          <p class="text-sm text-cyan-300">(719) 300-7863</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            Odyssey Gastropub
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            311 N Tejon St, Colorado Springs, CO 80903
+          </p>
+          <p class="text-sm text-cyan-300">(719) 999-5127</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            Fillmore Pizza Kitchen
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            3150 N Chestnut, Colorado Springs, CO 80907
+          </p>
+          <p class="text-sm text-cyan-300">(719) 635-5955</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            Pub Dog Colorado
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            2207 Bott Ave, Colorado Springs, CO 80904
+          </p>
+          <p class="text-sm text-cyan-300">(719) 375-0771</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            Louie Louie’s Piano Bar
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            522 S Tejon St, Colorado Springs, CO 80903
+          </p>
+          <p class="text-sm text-cyan-300">(719) 698-9672</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            Axe and the Oak Distillery and Whiskey House
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            1604 S Cascade Ave, Unit #80, Colorado Springs, CO 80905
+          </p>
+          <p class="text-sm text-cyan-300">(719) 660-1624</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            Topgolf Colorado Springs
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            165 Spectrum Loop, Colorado Springs, CO 80921
+          </p>
+          <p class="text-sm text-cyan-300">(719) 653-0857</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            OCC Brewing
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            2316 W Colorado Ave, Colorado Springs, CO 80904
+          </p>
+          <p class="text-sm text-cyan-300">(719) 308-2173</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            3 Hundred Days of Shine Distilling
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            279 Beacon Lite Rd, Unit G, Monument, CO 80132
+          </p>
+          <p class="text-sm text-cyan-300">(719) 466-0023</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            Principal’s Office
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            1604 S Cascade Ave, Colorado Springs, CO 80905
+          </p>
+          <p class="text-sm text-cyan-300">(719) 368-6112</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            Latigo Winery
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            11425 Black Forest Rd, Colorado Springs, CO 80908
+          </p>
+          <p class="text-sm text-cyan-300">(719) 698-9854</p>
+        </div>
+
+        <div class="blur-card p-4">
+          <h3 class="text-lg font-semibold mb-2 text-emerald-400">
+            Cerberus Brewing Company
+          </h3>
+          <p class="text-sm text-gray-300 mb-1">
+            702 W Colorado Ave, Colorado Springs, CO 80905
+          </p>
+          <p class="text-sm text-cyan-300">(719) 636-2337</p>
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- TRAFFIC CAMS -->
-  <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-4">
-    <div class="cam-box blur-card p-4 text-center"><h3 class="text-lg font-semibold mb-3 text-indigo-300">I-25 & Fillmore</h3><img id="fillmore" class="rounded-lg shadow-md w-full" src="https://websvc.coloradosprings.gov/live/TOC/00095_I-25%20(mm145)%20_%20Fillmore.jpg"></div>
-    <div class="cam-box blur-card p-4 text-center"><h3 class="text-lg font-semibold mb-3 text-indigo-300">I-25 & Circle</h3><img id="circle" class="rounded-lg shadow-md w-full" src="https://websvc.coloradosprings.gov/live/TOC/00106_I-25%20(mm138)%20_%20Circle.jpg"></div>
-    <div class="cam-box blur-card p-4 text-center"><h3 class="text-lg font-semibold mb-3 text-indigo-300">Platte & Murray</h3><img id="platte" class="rounded-lg shadow-md w-full" src="https://websvc.coloradosprings.gov/live/TOC/00072_Platte%20Ave%20(E04300)%20_%20Murray.jpg"></div>
-    <div class="cam-box blur-card p-4 text-center"><h3 class="text-lg font-semibold mb-3 text-indigo-300">Powers & Carefree</h3><img id="powers" class="rounded-lg shadow-md w-full" src="https://websvc.coloradosprings.gov/live/TOC/00014_Powers%20(mm145)%20_%20Carefree%20N.jpg"></div>
-    <div class="cam-box blur-card p-4 text-center"><h3 class="text-lg font-semibold mb-3 text-indigo-300">Austin Bluffs & Stetson</h3><img id="austin" class="rounded-lg shadow-md w-full" src="https://websvc.coloradosprings.gov/live/TOC/00064_Austin%20Bluffs%20(N05500)%20_%20Stetson%20Hills.jpg"></div>
-    <div class="cam-box blur-card p-4 text-center"><h3 class="text-lg font-semibold mb-3 text-indigo-300">Academy & Platte</h3><img id="academy" class="rounded-lg shadow-md w-full" src="https://websvc.coloradosprings.gov/live/TOC/00118_Academy%20(N00400)%20_%20Platte%20Ave.jpg"></div>
-    <div class="cam-box blur-card p-4 text-center"><h3 class="text-lg font-semibold mb-3 text-indigo-300">Academy & Maizeland</h3><img id="academy_maizeland" class="rounded-lg shadow-md w-full" src="https://websvc.coloradosprings.gov/live/TOC/00122_Academy%20(N02400)%20_%20Maizeland.jpg"></div>
-    <div class="cam-box blur-card p-4 text-center"><h3 class="text-lg font-semibold mb-3 text-indigo-300">I-25 & Woodmen</h3><img id="i25_woodmen" class="rounded-lg shadow-md w-full" src="https://websvc.coloradosprings.gov/live/TOC/00090_I-25%20(mm149)%20_%20Woodmen.jpg"></div>
-    <div class="cam-box blur-card p-4 text-center"><h3 class="text-lg font-semibold mb-3 text-indigo-300">CO-24 & 21st</h3><img id="co24_21st" class="rounded-lg shadow-md w-full" src="https://websvc.coloradosprings.gov/live/TOC/00135_Hwy%2024%20(W02100)%20_%2021st.jpg"></div>
-  </div>
-
-  <!-- RADIO STREAM -->
-  <div class="w-full max-w-6xl blur-card p-4 mt-4 shadow-xl text-center">
-    <h2 class="text-lg font-semibold text-purple-400 mb-2">KRDO News Radio</h2>
-    <iframe title="KRDO News Radio Player" height="150" width="100%" scrolling="no" src="https://www.podbean.com/player-v2/?i=6wpsb-23ef48-pbblog-playlist&pbad=0&share=1&download=1&rtl=0&fonts=Arial&skin=1&order=episodic&limit=1&filter=tags&tag=12599570&ss=1c1b3fdc8331de79ec9f6e826a1e83c8&btn-skin=3&size=150" allowfullscreen></iframe>
-  </div>
-
-  <!-- ARRIVALS + DEPARTURES -->
-  <div class="w-full max-w-6xl grid md:grid-cols-2 gap-6 mt-8">
-    <div class="bg-gray-900/70 rounded-2xl p-4 shadow-xl">
-      <h2 class="text-xl font-semibold mb-4 text-blue-400 tracking-wide">Arrivals & Departures</h2>
-      <iframe class="w-full h-80 rounded-xl shadow-md" src="https://www.airnavradar.com/live-widget/KCOS?type=table&showArrivals=true"></iframe>
+    <h2 class="text-xl font-semibold mb-4 text-orange-500 tracking-wide">
+      Westside Bike Map
+    </h2>
+    <div class="w-full max-w-6xl mx-auto mt-4 p-2">
+      <div class="overflow-hidden rounded-2xl shadow-xl border border-gray-700">
+        <iframe
+          src="https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/bike_map.pdf"
+          class="w-full h-[80vh]"
+          title="Bike Map PDF"
+        >
+        </iframe>
+      </div>
     </div>
-    <div class="bg-gray-900/70 rounded-2xl p-4 shadow-xl">
-      <h2 class="text-xl font-semibold mb-4 text-emerald-400 tracking-wide">Marajuania Retail</h2>
-      <iframe src="https://www.google.com/maps/d/embed?mid=1lg7OEkud0TsmrJiBP-WCQsm9MdfD_t0&ehbc=2E312F" class="w-full h-80 rounded-xl shadow-md"></iframe>
+
+    <!-- CRYPTO MARQUEE -->
+    <div
+      class="w-full max-w-6xl bg-gray-900/80 text-sm text-yellow-400 rounded-xl shadow-lg p-3 mt-8 overflow-hidden relative"
+    >
+      <div id="crypto-marquee" class="crypto-marquee-inner">
+        Loading crypto prices...
+      </div>
     </div>
-  </div>
- <!-- BARS & NIGHTLIFE -->
-  <h2 class="text-xl font-semibold mb-4 text-pink-500 tracking-wide">Bars and Nightlife</h2>
-<div class="w-full max-w-6xl mt-8 h-[80vh] overflow-y-auto">
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-     
 
-      <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">Voodoo Brewing — Colorado Springs Pub</h3>
-         <p class="text-sm text-gray-300 mb-1">808 Garden of the Gods Rd, Colorado Springs, CO 80907</p>
-         <p class="text-sm text-cyan-300">(719) 203-6378</p>
-       </div>
+    <!-- JS -->
+    <script>
+      function updateClock() {
+        const now = new Date();
+        document.getElementById("digital-time").textContent =
+          `${now.getHours().toString().padStart(2, "0")}:${now.getMinutes().toString().padStart(2, "0")}:${now.getSeconds().toString().padStart(2, "0")}`;
+        const days = [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ];
+        const months = [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ];
+        document.getElementById("date-display").textContent =
+          `${days[now.getDay()]}, ${months[now.getMonth()]} ${now.getDate()}`;
+      }
+      setInterval(updateClock, 1000);
+      updateClock();
 
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">Jack Quinn’s Irish Pub & Restaurant</h3>
-         <p class="text-sm text-gray-300 mb-1">21 S Tejon St, Colorado Springs, CO 80903</p>
-         <p class="text-sm text-cyan-300">(719) 385-0766</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">Poor Richard’s Restaurant / Rico’s</h3>
-         <p class="text-sm text-gray-300 mb-1">322 1/2 N Tejon St, Colorado Springs, CO 80903</p>
-         <p class="text-sm text-cyan-300">(719) 578-5549</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">Whistle Pig Brewing Company</h3>
-         <p class="text-sm text-gray-300 mb-1">2117 Templeton Gap Rd, Colorado Springs, CO 80907</p>
-         <p class="text-sm text-cyan-300">(719) 641-7818</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">Bourbon Brothers Smokehouse & Tavern</h3>
-         <p class="text-sm text-gray-300 mb-1">13021 Bass Pro Dr, Colorado Springs, CO 80921</p>
-         <p class="text-sm text-cyan-300">(719) 219-1830</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">Goat Patch Brewing Company</h3>
-         <p class="text-sm text-gray-300 mb-1">2727 N Cascade Ave Ste 123, Colorado Springs, CO 80907</p>
-         <p class="text-sm text-cyan-300">(719) 471-4628</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">503W</h3>
-         <p class="text-sm text-gray-300 mb-1">503 W Colorado Ave, Colorado Springs, CO 80905</p>
-         <p class="text-sm text-cyan-300">(719) 471-3370</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">Bristol Brewing Company</h3>
-         <p class="text-sm text-gray-300 mb-1">1604 S Cascade Ave, Colorado Springs, CO 80905</p>
-         <p class="text-sm text-cyan-300">(719) 633-2555</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">Jose Muldoon’s Food & Drink Downtown</h3>
-         <p class="text-sm text-gray-300 mb-1">222 N Tejon St, Colorado Springs, CO 80903</p>
-         <p class="text-sm text-cyan-300">(719) 636-2311</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">Bristol’s Spark Beer + BBQ</h3>
-         <p class="text-sm text-gray-300 mb-1">1604 S Cascade Ave, Colorado Springs, CO 80905</p>
-         <p class="text-sm text-cyan-300">(719) 368-6100</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">CO.A.T.I.</h3>
-         <p class="text-sm text-gray-300 mb-1">514 S Tejon St, Colorado Springs, CO 80903</p>
-         <p class="text-sm text-cyan-300">(719) 300-7500</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">The Wines of Colorado</h3>
-         <p class="text-sm text-gray-300 mb-1">8045 W Hwy 24, Cascade, CO 80809</p>
-         <p class="text-sm text-cyan-300">(719) 684-0900</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">Commonfork Bites & Brews</h3>
-         <p class="text-sm text-gray-300 mb-1">21 N Nevada Ave, Colorado Springs, CO 80903</p>
-         <p class="text-sm text-cyan-300">(719) 634-0003</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">uva wine bar</h3>
-         <p class="text-sm text-gray-300 mb-1">1268 Interquest Pkwy, Suite 160, Colorado Springs, CO 80921</p>
-         <p class="text-sm text-cyan-300">(719) 598-1990</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">Lumen8 Rooftop Social</h3>
-         <p class="text-sm text-gray-300 mb-1">402 S Tejon St, Colorado Springs, CO 80903</p>
-         <p class="text-sm text-cyan-300">(719) 822-2889</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">Avenue 19</h3>
-         <p class="text-sm text-gray-300 mb-1">19 N Tejon St, Colorado Springs, CO 80903</p>
-         <p class="text-sm text-cyan-300">(719) 207-8189</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">Ivywild School</h3>
-         <p class="text-sm text-gray-300 mb-1">1604 S Cascade Ave, Colorado Springs, CO 80905</p>
-         <p class="text-sm text-cyan-300">(719) 368-6100</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">Oskar Blues</h3>
-         <p class="text-sm text-gray-300 mb-1">118 N Tejon St, Colorado Springs, CO 80903</p>
-         <p class="text-sm text-cyan-300">(719) 375-1925</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">Streetcar520</h3>
-         <p class="text-sm text-gray-300 mb-1">520 S Tejon St, Colorado Springs, CO 80903</p>
-         <p class="text-sm text-cyan-300">(719) 633-3300</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">Loyal Coffee</h3>
-         <p class="text-sm text-gray-300 mb-1">408 S Nevada Ave, Colorado Springs, CO 80903</p>
-         <p class="text-sm text-cyan-300">(719) 235-5080</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">ViewHouse Colorado Springs</h3>
-         <p class="text-sm text-gray-300 mb-1">7114 Campus Dr, Colorado Springs, CO 80920</p>
-         <p class="text-sm text-cyan-300">(719) 394-4137</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">Trinity Brewing Company</h3>
-         <p class="text-sm text-gray-300 mb-1">1466 Garden of the Gods Rd, Ste 184, Colorado Springs, CO 80907</p>
-         <p class="text-sm text-cyan-300">(719) 497-2739</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">Colorado Mountain Brewery — Roundhouse</h3>
-         <p class="text-sm text-gray-300 mb-1">600 S 21st St #180, Colorado Springs, CO 80904</p>
-         <p class="text-sm text-cyan-300">(719) 466-8240</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">Illegal Pete’s Tejon</h3>
-         <p class="text-sm text-gray-300 mb-1">32 S Tejon, Colorado Springs, CO 80903</p>
-         <p class="text-sm text-cyan-300">(719) 752-1735</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">Cheers Liquor Mart</h3>
-         <p class="text-sm text-gray-300 mb-1">1105 N Circle Dr, Colorado Springs, CO 80909</p>
-         <p class="text-sm text-cyan-300">(719) 574-2244</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">ICONS</h3>
-         <p class="text-sm text-gray-300 mb-1">16 E Kiowa St, Colorado Springs, CO 80903</p>
-         <p class="text-sm text-cyan-300">(719) 300-7863</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">Odyssey Gastropub</h3>
-         <p class="text-sm text-gray-300 mb-1">311 N Tejon St, Colorado Springs, CO 80903</p>
-         <p class="text-sm text-cyan-300">(719) 999-5127</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">Fillmore Pizza Kitchen</h3>
-         <p class="text-sm text-gray-300 mb-1">3150 N Chestnut, Colorado Springs, CO 80907</p>
-         <p class="text-sm text-cyan-300">(719) 635-5955</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">Pub Dog Colorado</h3>
-         <p class="text-sm text-gray-300 mb-1">2207 Bott Ave, Colorado Springs, CO 80904</p>
-         <p class="text-sm text-cyan-300">(719) 375-0771</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">Louie Louie’s Piano Bar</h3>
-         <p class="text-sm text-gray-300 mb-1">522 S Tejon St, Colorado Springs, CO 80903</p>
-         <p class="text-sm text-cyan-300">(719) 698-9672</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">Axe and the Oak Distillery and Whiskey House</h3>
-         <p class="text-sm text-gray-300 mb-1">1604 S Cascade Ave, Unit #80, Colorado Springs, CO 80905</p>
-         <p class="text-sm text-cyan-300">(719) 660-1624</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">Topgolf Colorado Springs</h3>
-         <p class="text-sm text-gray-300 mb-1">165 Spectrum Loop, Colorado Springs, CO 80921</p>
-         <p class="text-sm text-cyan-300">(719) 653-0857</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">OCC Brewing</h3>
-         <p class="text-sm text-gray-300 mb-1">2316 W Colorado Ave, Colorado Springs, CO 80904</p>
-         <p class="text-sm text-cyan-300">(719) 308-2173</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">3 Hundred Days of Shine Distilling</h3>
-         <p class="text-sm text-gray-300 mb-1">279 Beacon Lite Rd, Unit G, Monument, CO 80132</p>
-         <p class="text-sm text-cyan-300">(719) 466-0023</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">Principal’s Office</h3>
-         <p class="text-sm text-gray-300 mb-1">1604 S Cascade Ave, Colorado Springs, CO 80905</p>
-         <p class="text-sm text-cyan-300">(719) 368-6112</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">Latigo Winery</h3>
-         <p class="text-sm text-gray-300 mb-1">11425 Black Forest Rd, Colorado Springs, CO 80908</p>
-         <p class="text-sm text-cyan-300">(719) 698-9854</p>
-       </div>
-
-       <div class="blur-card p-4">
-         <h3 class="text-lg font-semibold mb-2 text-emerald-400">Cerberus Brewing Company</h3>
-         <p class="text-sm text-gray-300 mb-1">702 W Colorado Ave, Colorado Springs, CO 80905</p>
-         <p class="text-sm text-cyan-300">(719) 636-2337</p>
-       </div>
-        
-  </div>
-</div>
-<h2 class="text-xl font-semibold mb-4 text-orange-500 tracking-wide">Westside Bike Map</h2>
-<div class="w-full max-w-6xl mx-auto mt-4 p-2">
-  <div class="overflow-hidden rounded-2xl shadow-xl border border-gray-700">
-    <iframe 
-      src="https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/bike_map.pdf" 
-      class="w-full h-[80vh]"
-      title="Bike Map PDF">
-    </iframe>
-  </div>
-</div>
-
-
-
-
-
-  <!-- CRYPTO MARQUEE -->
-  <div class="w-full max-w-6xl bg-gray-900/80 text-sm text-yellow-400 rounded-xl shadow-lg p-3 mt-8 overflow-hidden relative">
-    <div id="crypto-marquee" class="crypto-marquee-inner">Loading crypto prices...</div>
-  </div>
-
-  <!-- JS -->
-  <script>
-    function updateClock() {
-      const now = new Date();
-      document.getElementById("digital-time").textContent =
-        `${now.getHours().toString().padStart(2,"0")}:${now.getMinutes().toString().padStart(2,"0")}:${now.getSeconds().toString().padStart(2,"0")}`;
-      const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-      const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-      document.getElementById("date-display").textContent =
-        `${days[now.getDay()]}, ${months[now.getMonth()]} ${now.getDate()}`;
-    }
-    setInterval(updateClock,1000); updateClock();
-
-    async function getWeather() {
-      try {
-        const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Colorado Springs,US&units=metric&appid=2bdad522ac3bb9f3eefa5566d0f514fa`);
-        const data = await res.json();
-        document.getElementById("temp").textContent = Math.round(data.main.temp*9/5+32) + "°F";
-      } catch(e) { console.error("Weather fetch failed", e); }
-    }
-    getWeather(); setInterval(getWeather,600000);
-
-    // Crypto Marquee
-    (async function() {
-      const marquee = document.getElementById("crypto-marquee");
-      const coins = ['bitcoin','ethereum','cardano','dogecoin','litecoin'];
-      const vs_currency = 'usd';
-      async function fetchPrices() {
+      async function getWeather() {
         try {
-          const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coins.join(',')}&vs_currencies=${vs_currency}&include_24hr_change=true`;
-          const res = await fetch(url);
+          const res = await fetch(
+            `https://api.openweathermap.org/data/2.5/weather?q=Colorado Springs,US&units=metric&appid=2bdad522ac3bb9f3eefa5566d0f514fa`,
+          );
           const data = await res.json();
-          return data;
-        } catch (e) { console.error("Crypto marquee error:", e); return null; }
+          document.getElementById("temp").textContent =
+            Math.round((data.main.temp * 9) / 5 + 32) + "°F";
+        } catch (e) {
+          console.error("Weather fetch failed", e);
+        }
       }
-      function formatPrice(n) {
-        return n >= 1 ? n.toLocaleString(undefined,{maximumFractionDigits:2}) : n.toLocaleString(undefined,{maximumFractionDigits:6});
-      }
-      async function updateMarquee() {
-        const data = await fetchPrices();
-        if(!data) return;
-        marquee.innerHTML = coins.map(id => {
-          const price = data[id]?.[vs_currency] ?? 0;
-          const change = data[id]?.[vs_currency + "_24h_change"] ?? 0;
-          const symbol = id.toUpperCase();
-          const arrow = change >= 0 ? "▲" : "▼";
-          const color = change >= 0 ? "lime" : "red";
-          return `<span style="margin:0 25px;font-weight:600;">${symbol}: $${formatPrice(price)} <span style="color:${color};">${arrow}${Math.abs(change).toFixed(2)}%</span></span>`;
-        }).join(" ") + " ";
-        marquee.innerHTML += marquee.innerHTML;
-      }
-      updateMarquee(); setInterval(updateMarquee,50000);
-    })();
-  </script>
-</body>
+      getWeather();
+      setInterval(getWeather, 600000);
+
+      // Crypto Marquee
+      (async function () {
+        const marquee = document.getElementById("crypto-marquee");
+        const coins = [
+          "bitcoin",
+          "ethereum",
+          "cardano",
+          "dogecoin",
+          "litecoin",
+        ];
+        const vs_currency = "usd";
+        async function fetchPrices() {
+          try {
+            const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coins.join(",")}&vs_currencies=${vs_currency}&include_24hr_change=true`;
+            const res = await fetch(url);
+            const data = await res.json();
+            return data;
+          } catch (e) {
+            console.error("Crypto marquee error:", e);
+            return null;
+          }
+        }
+        function formatPrice(n) {
+          return n >= 1
+            ? n.toLocaleString(undefined, { maximumFractionDigits: 2 })
+            : n.toLocaleString(undefined, { maximumFractionDigits: 6 });
+        }
+        async function updateMarquee() {
+          const data = await fetchPrices();
+          if (!data) return;
+          marquee.innerHTML =
+            coins
+              .map((id) => {
+                const price = data[id]?.[vs_currency] ?? 0;
+                const change = data[id]?.[vs_currency + "_24h_change"] ?? 0;
+                const symbol = id.toUpperCase();
+                const arrow = change >= 0 ? "▲" : "▼";
+                const color = change >= 0 ? "lime" : "red";
+                return `<span style="margin:0 25px;font-weight:600;">${symbol}: $${formatPrice(price)} <span style="color:${color};">${arrow}${Math.abs(change).toFixed(2)}%</span></span>`;
+              })
+              .join(" ") + " ";
+          marquee.innerHTML += marquee.innerHTML;
+        }
+        updateMarquee();
+        setInterval(updateMarquee, 50000);
+      })();
+    </script>
+  </body>
 </html>
+
+<!--https://sudo-self.github.io/city-view/index.html -->
 
 
 
