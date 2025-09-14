@@ -25,80 +25,15 @@
     }
     iframe { max-width: 100%; border: none; }
 
-       /* Crypto Marquee Styles */
-    .crypto-marquee-container {
-      width: 100%;
-      max-width: 1200px;
-      background-color: #1e1e1e;
-      border-radius: 12px;
-      padding: 12px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-      overflow: hidden;
-      margin-top: 2rem;
-    }
-
-    .crypto-marquee {
-      display: inline-block;
-      white-space: nowrap;
-      font-size: 18px;
-      font-weight: 500;
-      animation: marquee 30s linear infinite;
-    }
-
-    .crypto-marquee span {
-      margin: 0 20px;
-      padding: 4px 12px;
-      border-radius: 8px;
-      background-color: #2d2d2d;
-      display: inline-block;
-      transition: background-color 0.3s ease;
-    }
-
-    .crypto-marquee span:hover {
-      background-color: #3a3a3a;
-    }
-
-    .crypto-marquee span.up {
-      color: #00cc88;
-      border: 1px solid #00cc88;
-    }
-
-    .crypto-marquee span.down {
-      color: #ff4757;
-      border: 1px solid #ff4757;
-    }
-
-    .crypto-marquee span .symbol {
-      font-weight: 600;
-      margin-right: 6px;
-    }
-
-    .crypto-marquee span .price {
-      font-weight: 500;
-    }
-
-    .crypto-marquee span .change {
-      margin-left: 8px;
-      font-size: 14px;
-      font-weight: 500;
-    }
-
+    /* Modern marquee animation */
     @keyframes marquee {
-      0% { transform: translateX(100%); }
+      0%   { transform: translateX(100%); }
       100% { transform: translateX(-100%); }
     }
-
- 
-    @media (max-width: 768px) {
-      .crypto-marquee { font-size: 16px; }
-      .crypto-marquee span { margin: 0 12px; padding: 3px 10px; font-size: 14px; }
-      .crypto-marquee span .change { font-size: 13px; }
-    }
-
-    @media (max-width: 480px) {
-      .crypto-marquee-container { padding: 8px; }
-      .crypto-marquee { font-size: 15px; }
-      .crypto-marquee span { margin: 0 8px; padding: 2px 8px; font-size: 13px; }
+    .crypto-marquee-inner {
+      display: inline-block;
+      white-space: nowrap;
+      animation: marquee 30s linear infinite;
     }
   </style>
 </head>
@@ -124,15 +59,15 @@
 
   <!-- TRAFFIC CAMS -->
   <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-4">
-    <div class="cam-box blur-card p-4 text-center"><h3 class="text-lg font-semibold mb-3 text-emerald-300">I-25 & Fillmore</h3><img id="fillmore" class="rounded-lg shadow-md w-full" src="https://websvc.coloradosprings.gov/live/TOC/00095_I-25%20(mm145)%20_%20Fillmore.jpg"></div>
-    <div class="cam-box blur-card p-4 text-center"><h3 class="text-lg font-semibold mb-3 text-emerald-300">I-25 & Circle</h3><img id="circle" class="rounded-lg shadow-md w-full" src="https://websvc.coloradosprings.gov/live/TOC/00106_I-25%20(mm138)%20_%20Circle.jpg"></div>
-    <div class="cam-box blur-card p-4 text-center"><h3 class="text-lg font-semibold mb-3 text-emerald-300">Platte & Murray</h3><img id="platte" class="rounded-lg shadow-md w-full" src="https://websvc.coloradosprings.gov/live/TOC/00072_Platte%20Ave%20(E04300)%20_%20Murray.jpg"></div>
-    <div class="cam-box blur-card p-4 text-center"><h3 class="text-lg font-semibold mb-3 text-emerald-300">Powers & Carefree</h3><img id="powers" class="rounded-lg shadow-md w-full" src="https://websvc.coloradosprings.gov/live/TOC/00014_Powers%20(mm145)%20_%20Carefree%20N.jpg"></div>
-    <div class="cam-box blur-card p-4 text-center"><h3 class="text-lg font-semibold mb-3 text-emerald-300">Austin Bluffs & Stetson</h3><img id="austin" class="rounded-lg shadow-md w-full" src="https://websvc.coloradosprings.gov/live/TOC/00064_Austin%20Bluffs%20(N05500)%20_%20Stetson%20Hills.jpg"></div>
-    <div class="cam-box blur-card p-4 text-center"><h3 class="text-lg font-semibold mb-3 text-emerald-300">Academy & Platte</h3><img id="academy" class="rounded-lg shadow-md w-full" src="https://websvc.coloradosprings.gov/live/TOC/00118_Academy%20(N00400)%20_%20Platte%20Ave.jpg"></div>
-    <div class="cam-box blur-card p-4 text-center"><h3 class="text-lg font-semibold mb-3 text-emerald-300">Academy & Maizeland</h3><img id="academy_maizeland" class="rounded-lg shadow-md w-full" src="https://websvc.coloradosprings.gov/live/TOC/00122_Academy%20(N02400)%20_%20Maizeland.jpg"></div>
-    <div class="cam-box blur-card p-4 text-center"><h3 class="text-lg font-semibold mb-3 text-emerald-300">I-25 & Woodmen</h3><img id="i25_woodmen" class="rounded-lg shadow-md w-full" src="https://websvc.coloradosprings.gov/live/TOC/00090_I-25%20(mm149)%20_%20Woodmen.jpg"></div>
-    <div class="cam-box blur-card p-4 text-center"><h3 class="text-lg font-semibold mb-3 text-emerald-300">CO-24 & 21st</h3><img id="co24_21st" class="rounded-lg shadow-md w-full" src="https://websvc.coloradosprings.gov/live/TOC/00135_Hwy%2024%20(W02100)%20_%2021st.jpg"></div>
+    <div class="cam-box blur-card p-4 text-center"><h3 class="text-lg font-semibold mb-3 text-indigo-300">I-25 & Fillmore</h3><img id="fillmore" class="rounded-lg shadow-md w-full" src="https://websvc.coloradosprings.gov/live/TOC/00095_I-25%20(mm145)%20_%20Fillmore.jpg"></div>
+    <div class="cam-box blur-card p-4 text-center"><h3 class="text-lg font-semibold mb-3 text-indigo-300">I-25 & Circle</h3><img id="circle" class="rounded-lg shadow-md w-full" src="https://websvc.coloradosprings.gov/live/TOC/00106_I-25%20(mm138)%20_%20Circle.jpg"></div>
+    <div class="cam-box blur-card p-4 text-center"><h3 class="text-lg font-semibold mb-3 text-indigo-300">Platte & Murray</h3><img id="platte" class="rounded-lg shadow-md w-full" src="https://websvc.coloradosprings.gov/live/TOC/00072_Platte%20Ave%20(E04300)%20_%20Murray.jpg"></div>
+    <div class="cam-box blur-card p-4 text-center"><h3 class="text-lg font-semibold mb-3 text-indigo-300">Powers & Carefree</h3><img id="powers" class="rounded-lg shadow-md w-full" src="https://websvc.coloradosprings.gov/live/TOC/00014_Powers%20(mm145)%20_%20Carefree%20N.jpg"></div>
+    <div class="cam-box blur-card p-4 text-center"><h3 class="text-lg font-semibold mb-3 text-indigo-300">Austin Bluffs & Stetson</h3><img id="austin" class="rounded-lg shadow-md w-full" src="https://websvc.coloradosprings.gov/live/TOC/00064_Austin%20Bluffs%20(N05500)%20_%20Stetson%20Hills.jpg"></div>
+    <div class="cam-box blur-card p-4 text-center"><h3 class="text-lg font-semibold mb-3 text-indigo-300">Academy & Platte</h3><img id="academy" class="rounded-lg shadow-md w-full" src="https://websvc.coloradosprings.gov/live/TOC/00118_Academy%20(N00400)%20_%20Platte%20Ave.jpg"></div>
+    <div class="cam-box blur-card p-4 text-center"><h3 class="text-lg font-semibold mb-3 text-indigo-300">Academy & Maizeland</h3><img id="academy_maizeland" class="rounded-lg shadow-md w-full" src="https://websvc.coloradosprings.gov/live/TOC/00122_Academy%20(N02400)%20_%20Maizeland.jpg"></div>
+    <div class="cam-box blur-card p-4 text-center"><h3 class="text-lg font-semibold mb-3 text-indigo-300">I-25 & Woodmen</h3><img id="i25_woodmen" class="rounded-lg shadow-md w-full" src="https://websvc.coloradosprings.gov/live/TOC/00090_I-25%20(mm149)%20_%20Woodmen.jpg"></div>
+    <div class="cam-box blur-card p-4 text-center"><h3 class="text-lg font-semibold mb-3 text-indigo-300">CO-24 & 21st</h3><img id="co24_21st" class="rounded-lg shadow-md w-full" src="https://websvc.coloradosprings.gov/live/TOC/00135_Hwy%2024%20(W02100)%20_%2021st.jpg"></div>
   </div>
 
   <!-- ARRIVALS + DEPARTURES -->
@@ -150,9 +85,9 @@
     </div>
   </div>
 
- <!-- CRYPTO MARQUEE -->
-  <div class="crypto-marquee-container">
-    <div class="crypto-marquee" id="crypto-marquee">
+  <!-- CRYPTO MARQUEE -->
+  <div class="w-full max-w-6xl bg-gray-900/80 text-sm text-yellow-400 rounded-xl shadow-lg p-3 mt-8 overflow-hidden relative">
+    <div id="crypto-marquee" class="crypto-marquee-inner">
       Loading crypto prices...
     </div>
   </div>
@@ -234,6 +169,9 @@
             <span style="color:${color};">${arrow}${Math.abs(change).toFixed(2)}%</span>
           </span>`;
         }).join(" ");
+
+      
+        marquee.innerHTML += marquee.innerHTML;
       }
 
       updateMarquee();
@@ -242,6 +180,7 @@
   </script>
 </body>
 </html>
+
 
 
 
