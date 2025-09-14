@@ -110,6 +110,59 @@
     }
     getIPInfo();
   </script>
+  <!-- Simple Crypto Marquee -->
+<div class="w-full bg-gray-900/80 text-sm text-white rounded-xl shadow-lg p-2">
+  <marquee id="crypto-marquee" behavior="scroll" direction="left" scrollamount="6">
+    Loading crypto prices...
+  </marquee>
+</div>
+
+<script>
+(async function() {
+  const marquee = document.getElementById("crypto-marquee");
+  const coins = ['bitcoin','ethereum','cardano','dogecoin','litecoin']; // customize
+  const vs_currency = 'usd';
+
+  async function fetchPrices() {
+    try {
+      const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coins.join(',')}&vs_currencies=${vs_currency}&include_24hr_change=true`;
+      const res = await fetch(url);
+      const data = await res.json();
+      return data;
+    } catch (e) {
+      console.error("Crypto marquee error:", e);
+      return null;
+    }
+  }
+
+  function formatPrice(n) {
+    return n >= 1 
+      ? n.toLocaleString(undefined, {maximumFractionDigits: 2})
+      : n.toLocaleString(undefined, {maximumFractionDigits: 6});
+  }
+
+  async function updateMarquee() {
+    const data = await fetchPrices();
+    if (!data) return;
+
+    marquee.innerHTML = coins.map(id => {
+      const price = data[id]?.[vs_currency] ?? 0;
+      const change = data[id]?.[vs_currency + "_24h_change"] ?? 0;
+      const symbol = id.toUpperCase();
+      const arrow = change >= 0 ? "▲" : "▼";
+      const color = change >= 0 ? "lime" : "red";
+      return `<span style="margin:0 20px;">
+        ${symbol}: $${formatPrice(price)} 
+        <span style="color:${color};">${arrow}${Math.abs(change).toFixed(2)}%</span>
+      </span>`;
+    }).join(" ");
+  }
+
+  updateMarquee();
+  setInterval(updateMarquee, 30000); // refresh every 30s
+})();
+</script>
+
 </body>
 </html>
 
