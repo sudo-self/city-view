@@ -24,6 +24,82 @@
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
     }
     iframe { max-width: 100%; border: none; }
+
+       /* Crypto Marquee Styles */
+    .crypto-marquee-container {
+      width: 100%;
+      max-width: 1200px;
+      background-color: #1e1e1e;
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      margin-top: 2rem;
+    }
+
+    .crypto-marquee {
+      display: inline-block;
+      white-space: nowrap;
+      font-size: 18px;
+      font-weight: 500;
+      animation: marquee 30s linear infinite;
+    }
+
+    .crypto-marquee span {
+      margin: 0 20px;
+      padding: 4px 12px;
+      border-radius: 8px;
+      background-color: #2d2d2d;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+    }
+
+    .crypto-marquee span:hover {
+      background-color: #3a3a3a;
+    }
+
+    .crypto-marquee span.up {
+      color: #00cc88;
+      border: 1px solid #00cc88;
+    }
+
+    .crypto-marquee span.down {
+      color: #ff4757;
+      border: 1px solid #ff4757;
+    }
+
+    .crypto-marquee span .symbol {
+      font-weight: 600;
+      margin-right: 6px;
+    }
+
+    .crypto-marquee span .price {
+      font-weight: 500;
+    }
+
+    .crypto-marquee span .change {
+      margin-left: 8px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+ 
+    @media (max-width: 768px) {
+      .crypto-marquee { font-size: 16px; }
+      .crypto-marquee span { margin: 0 12px; padding: 3px 10px; font-size: 14px; }
+      .crypto-marquee span .change { font-size: 13px; }
+    }
+
+    @media (max-width: 480px) {
+      .crypto-marquee-container { padding: 8px; }
+      .crypto-marquee { font-size: 15px; }
+      .crypto-marquee span { margin: 0 8px; padding: 2px 8px; font-size: 13px; }
+    }
   </style>
 </head>
 <body class="bg-gradient-to-b from-[#0f172a] to-[#1e293b] text-white flex flex-col items-center p-4 gap-6">
@@ -74,11 +150,11 @@
     </div>
   </div>
 
-  <!-- CRYPTO MARQUEE -->
-  <div class="w-full max-w-6xl bg-gray-900/80 text-sm text-white rounded-xl shadow-lg p-3 mt-8">
-    <marquee id="crypto-marquee" behavior="scroll" direction="left" scrollamount="3" class="tracking-wide font-medium">
+ <!-- CRYPTO MARQUEE -->
+  <div class="crypto-marquee-container">
+    <div class="crypto-marquee" id="crypto-marquee">
       Loading crypto prices...
-    </marquee>
+    </div>
   </div>
 
   <!-- JS -->
