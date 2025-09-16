@@ -1047,19 +1047,19 @@
       </div>
     </div>
 
-    <!-- FOOTER -->
-    <footer class="w-full mt-12 py-6 bg-gray-900/80 text-gray-300 text-center rounded-xl shadow-inner">
-      <div class="max-w-6xl mx-auto px-4">
-        <p class="text-sm">
-          &copy; 2023 Colorado Springs Live •
-          <a href="https://sudo-self.github.io/city-view/" target="_blank" class="hover:text-pink-500 transition-colors">
-            sudo-self.github.io/city-view
-          </a>
-        </p>
-      </div>
-    </footer>
+<!-- FOOTER -->
+<footer class="w-full mt-12 py-6 bg-gray-900/80 text-gray-300 text-center rounded-xl shadow-inner">
+  <div class="max-w-6xl mx-auto px-4">
+    <p class="text-sm text-center">
+      <a href="https://sudo-self.github.io/city-view/" target="_blank" class="hover:text-pink-500 transition-colors">
+        sudo-self.github.io/city-view
+      </a>
+    </p>
+  </div>
+</footer>
 
-    <!-- JS -->
+
+
     <script>
       // DOM Ready
       document.addEventListener('DOMContentLoaded', function() {
@@ -1097,7 +1097,7 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // Get weather data
+  
         async function getWeather() {
           try {
             const res = await fetch(
@@ -1105,16 +1105,16 @@
             );
             const data = await res.json();
             
-            // Update temperature
+        
             document.getElementById("temp").innerHTML =
               `${Math.round((data.main.temp * 9) / 5 + 32)}°F <i class="fas fa-temperature-high ml-1"></i>`;
             
-            // Update weather description
+       
             const weatherDesc = data.weather[0].description;
             document.getElementById("weather-desc").innerHTML =
               `<i class="fas fa-${getWeatherIcon(data.weather[0].id)}"></i> ${capitalizeWords(weatherDesc)} • Humidity: ${data.main.humidity}%`;
             
-            // Update sunrise/sunset times
+        
             const sunrise = new Date(data.sys.sunrise * 1000);
             const sunset = new Date(data.sys.sunset * 1000);
             document.getElementById("sun-times").innerHTML =
@@ -1127,7 +1127,7 @@
           }
         }
         
-        // Helper function to get weather icon
+
         function getWeatherIcon(weatherId) {
           if (weatherId >= 200 && weatherId < 300) return "bolt";
           if (weatherId >= 300 && weatherId < 400) return "cloud-rain";
@@ -1139,12 +1139,12 @@
           return "cloud";
         }
         
-        // Helper function to capitalize words
+    
         function capitalizeWords(str) {
           return str.replace(/\b\w/g, l => l.toUpperCase());
         }
         
-        // Helper function to format time
+  
         function formatTime(date) {
           let hours = date.getHours();
           let minutes = date.getMinutes();
@@ -1156,9 +1156,9 @@
         }
         
         getWeather();
-        setInterval(getWeather, 600000); // Update every 10 minutes
+        setInterval(getWeather, 300000); 
 
-        // Camera image refresh with cache busting
+ 
         function refreshCamImages() {
           const cams = [
             'fillmore', 'circle', 'platte', 'powers',
@@ -1170,10 +1170,10 @@
             const img = document.getElementById(camId);
             if (img) {
               const originalSrc = img.src;
-              // Add timestamp to bypass cache
+          
               img.src = originalSrc.split('?')[0] + '?t=' + new Date().getTime();
               
-              // Update last updated time
+           
               const timeElement = document.querySelector(`[data-cam="${camId}"]`);
               if (timeElement) {
                 const now = new Date();
@@ -1183,10 +1183,10 @@
           });
         }
         
-        // Refresh camera images every 60 seconds
-        setInterval(refreshCamImages, 60000);
+     
+        setInterval(refreshCamImages, 30000);
         
-        // Show more cameras button
+   
         document.getElementById('show-more-cams').addEventListener('click', function() {
           const moreCams = document.getElementById('more-cams');
           const button = this;
@@ -1200,7 +1200,7 @@
           }
         });
         
-        // Smooth scrolling for navigation
+    
         document.querySelectorAll('.nav-tab').forEach(tab => {
           tab.addEventListener('click', function(e) {
             e.preventDefault();
@@ -1208,11 +1208,11 @@
             const targetElement = document.querySelector(targetId);
             
             if (targetElement) {
-              // Update active tab
+          
               document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
               this.classList.add('active');
               
-              // Scroll to section
+          
               window.scrollTo({
                 top: targetElement.offsetTop - 20,
                 behavior: 'smooth'
