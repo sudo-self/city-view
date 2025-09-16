@@ -5,7 +5,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Colorado Springs Traffic & Weather Dashboard</title>
+    <title>Colorado Springs</title>
     <meta name="description" content="Real-time traffic cameras, weather, and local information for Colorado Springs" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -219,7 +219,7 @@
       </div>
     </div>
 
-    <!-- NAVIGATION TABS -->
+    <!-- NAVIGATION  -->
     <div class="w-full max-w-6xl flex overflow-x-auto py-2 gap-1 scrollbar-custom">
       <a href="#traffic" class="nav-tab px-4 py-2 rounded-lg whitespace-nowrap active">Traffic Cams</a>
       <a href="#radio" class="nav-tab px-4 py-2 rounded-lg whitespace-nowrap">Radio</a>
@@ -229,7 +229,7 @@
       <a href="#pikespeak" class="nav-tab px-4 py-2 rounded-lg whitespace-nowrap">Pikes Peak</a>
     </div>
 
-    <!-- TRAFFIC CAMS -->
+ 
     <section id="traffic" class="w-full max-w-6xl">
       <h2 class="text-2xl font-bold mb-4 text-cyan-400 flex items-center gap-2">
         <i class="fas fa-camera"></i> Live Traffic Cameras
@@ -408,7 +408,7 @@
       </div>
     </section>
 
-    <!-- RADIO STREAM -->
+  
     <section id="radio" class="w-full max-w-6xl blur-card p-6 mt-8 shadow-xl">
       <h2 class="text-2xl font-bold mb-4 text-purple-400 flex items-center gap-2">
         <i class="fas fa-radio"></i> KRDO News Radio 105.5 FM / 1240 AM
@@ -429,7 +429,7 @@
       </div>
     </section>
 
-    <!-- ARRIVALS + DEPARTURES -->
+  
     <section id="travel" class="w-full max-w-6xl grid md:grid-cols-2 gap-6 mt-8">
       <div class="blur-card p-6">
         <h2 class="text-2xl font-bold mb-4 text-blue-400 flex items-center gap-2">
@@ -455,7 +455,7 @@
       </div>
     </section>
 
-    <!-- BARS & NIGHTLIFE -->
+
     <section id="nightlife" class="w-full max-w-6xl mt-8">
       <h2 class="text-2xl font-bold mb-4 text-pink-500 flex items-center gap-2">
         <i class="fas fa-glass-cheers"></i> Bars and Nightlife
@@ -901,13 +901,13 @@
       </div>
     </section>
 
-    <!-- Pikes Peak Cameras -->
+
     <section id="pikespeak" class="w-full max-w-6xl mt-8">
       <h2 class="text-2xl font-bold mb-4 text-indigo-400">Pikes Peak Cameras</h2>
        <span><i class="fas fa-mountain text-emerald-400"></i>Elevation: 14,115 Ft.</span><br />
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 
-        <!-- Camera Template -->
+
         <div class="blur-card p-4">
           <div class="camera-container relative">
             <img id="cogentry" class="rounded-lg w-full h-48 object-cover"
@@ -944,7 +944,7 @@
           <h3 class="text-lg font-semibold mt-3 text-indigo-300">Cog Upper Platform</h3>
         </div>
 
-        <!-- Additional Cameras -->
+      
         <div class="blur-card p-4">
           <div class="camera-container relative">
             <img id="southwest" class="rounded-lg w-full h-48 object-cover"
@@ -1020,7 +1020,7 @@
       </div>
     </section>
 
-    <!-- BIKE MAP -->
+
     <section id="biking" class="w-full max-w-6xl mt-8">
       <h2 class="text-2xl font-bold mb-4 text-orange-500 flex items-center gap-2">
         <i class="fas fa-bicycle"></i>City Bike Map
@@ -1037,7 +1037,7 @@
       </div>
     </section>
 
-    <!-- CRYPTO MARQUEE -->
+ 
     <div class="w-full max-w-6xl crypto-marquee bg-gray-900/80 text-sm text-yellow-400 rounded-xl shadow-lg p-3 mt-8 overflow-hidden relative">
       <div class="flex items-center gap-2 absolute left-0 top-0 bottom-0 bg-gradient-to-r from-gray-900 to-transparent z-10 pl-3">
         <i class="fas fa-coins"></i>
@@ -1047,7 +1047,7 @@
       </div>
     </div>
 
-<!-- FOOTER -->
+
 <footer class="w-full mt-12 py-6 bg-gray-900/80 text-gray-300 text-center rounded-xl shadow-inner">
   <div class="max-w-6xl mx-auto px-4">
     <p class="text-sm text-center">
@@ -1061,9 +1061,9 @@
 
 
     <script>
-      // DOM Ready
+   
       document.addEventListener('DOMContentLoaded', function() {
-        // Update clock
+      
         function updateClock() {
           const now = new Date();
           document.getElementById("digital-time").textContent =
@@ -1221,7 +1221,7 @@
           });
         });
 
-        // Crypto Marquee
+     
         (async function() {
           const marquee = document.getElementById("crypto-marquee");
           const coins = [
